@@ -4,7 +4,8 @@
 #include "platform.h"
 
 typedef enum {
-    RSC_DDR3 = 0,
+	RSC_ANY = 0,
+    RSC_DDR3,
     RSC_DDR4
 } ram_socket_t;
 

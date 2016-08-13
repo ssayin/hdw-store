@@ -6,7 +6,8 @@
 #include "platform.h"
 
 typedef enum {
-    PSC_FM2p = 0,
+	PSC_ANY = 0,
+    PSC_FM2p,
     PSC_AM3p,
     PSC_1150,
     PSC_1151

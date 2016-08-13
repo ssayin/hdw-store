@@ -114,21 +114,22 @@ void print_shopping_cart_billing(FILE* fp, shopping_cart_t* cart) {
 	int i;
 	void* ptr;
 	shopping_cart_item_type_t type;
-	//int computer;
 
 	char brand[20];
 	char code[20];
 	char szType[20];
 	unsigned int price;
 	unsigned int price_total = 0;
+	unsigned int count;
 
-	fprintf(fp, "%-20s%-23s%-14s%-8s\n", "Marka",
-		"Kod", "Parca Turu", "Fiyat");
+	fprintf(fp, "%-5s%-23s%-23s%-14s%-8s\n", "#", "Marka",
+		"Kod", "Parca Turu", "Tutar");
 
 	for (i = 0; i < shopping_cart_get_item_count(cart); ++i) {
 
 		type = shopping_cart_get_elem_type(cart, i);
 		ptr = shopping_cart_get_elem_ptr(cart, i);
+		count = shopping_cart_get_elem_count(cart, i);
 
 		switch (type) {
 		case SCI_MAINBOARD:
@@ -163,11 +164,11 @@ void print_shopping_cart_billing(FILE* fp, shopping_cart_t* cart) {
 			break;
 		}
 
-		price_total += price;
+		price_total += price * count;
 
-		fprintf(fp, "%-20s%-23s%-14s%-8u\n", brand,
-			code, szType, price);
+		fprintf(fp, "%-5u%-23s%-23s%-14s%-8u\n", count, brand,
+			code, szType, price * count);
 	}
 
-	fprintf(fp, "\nToplam Fiyat: %u\n", price_total);
+	fprintf(fp, "\nToplam Fiyat: %u\n\n", price_total);
 }
